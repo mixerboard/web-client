@@ -8,7 +8,6 @@ const Main: FC = ({ children }) => {
         main {
           display: grid;
           justify-content: center;
-          max-width: 500px;
           margin: 2vw;
         }
       `}</style>
