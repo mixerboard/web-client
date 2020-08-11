@@ -9,7 +9,7 @@ const Layout: FC = ({ children }) => {
       <Header
         logoImage={
           <Image
-            src="https://raw.githubusercontent.com/mixerboard/brand/master/logos/logo-1x.png"
+            src="https://raw.githubusercontent.com/mixerboard/brand/master/logos/logo-0.75x.png"
             alt="Mixerboard logo"
           />
         }

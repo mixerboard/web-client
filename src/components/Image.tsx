@@ -12,6 +12,7 @@ const Image: FC<Props> = ({ src, alt }) => {
       <style jsx>{`
         img {
           width: 100%;
+          height: 100%;
         }
       `}</style>
     </>

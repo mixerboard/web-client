@@ -1,4 +1,5 @@
 import { FC, ReactElement } from "react";
+import Link from "next/link";
 
 interface Props {
   logoImage: ReactElement;
@@ -7,11 +8,20 @@ interface Props {
 const Header: FC<Props> = ({ logoImage }) => {
   return (
     <>
-      <header>{logoImage}</header>
+      <header>
+        <Link href="/">
+          <a className="logo-container">{logoImage}</a>
+        </Link>
+      </header>
       <style jsx>{`
         header {
           display: grid;
           justify-content: center;
+          height: 3rem;
+        }
+
+        .logo-container {
+          height: 3rem;
         }
       `}</style>
     </>
