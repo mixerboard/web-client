@@ -9,7 +9,6 @@ const HomePage: FC = () => {
     <>
       <Card>
         <Heading>Source</Heading>
-        <SpotifyButton />
         <br />
         <SpotifyButton />
         <br />
