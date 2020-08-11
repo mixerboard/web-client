@@ -2,10 +2,10 @@ import { FC } from "react";
 
 interface Props {
   src: string;
-  alt: string;
+  alt?: string;
 }
 
-const Image: FC<Props> = ({ src, alt }) => {
+const Image: FC<Props> = ({ src, alt = "" }) => {
   return (
     <>
       <img src={src} alt={alt} />
