@@ -2,11 +2,11 @@ import { RiLoader4Line } from "react-icons/ri";
 import { FC } from "react";
 
 interface Props {
-  type?: colors;
+  variant?: colors;
 }
 
-const Spinner: FC<Props> = ({ type = "primary" }) => {
-  const cssColorVariable = `var(--color-${type})`;
+const Spinner: FC<Props> = ({ variant = "primary" }) => {
+  const cssColorVariable = `var(--color-${variant})`;
 
   return (
     <>

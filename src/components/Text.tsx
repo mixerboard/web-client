@@ -1,11 +1,11 @@
 import { FC } from "react";
 
 interface Props {
-  type?: colors;
+  variant?: colors;
 }
 
-const Text: FC<Props> = ({ type = "dark", children }) => {
-  const cssColorVariable = `var(--color-${type})`;
+const Text: FC<Props> = ({ variant = "dark", children }) => {
+  const cssColorVariable = `var(--color-${variant})`;
 
   return (
     <>

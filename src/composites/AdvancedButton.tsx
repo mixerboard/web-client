@@ -3,24 +3,23 @@ import Button from "components/Button";
 import Spinner from "components/Spinner";
 import Text from "components/Text";
 
-interface Props {
-  type?: colors;
+interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
+  variant?: colors;
   loading?: boolean;
-  buttonProps?: ButtonHTMLAttributes<HTMLButtonElement>;
 }
 
 const AdvancedButton: FC<Props> = ({
-  type = "primary",
+  variant = "primary",
   loading = false,
-  buttonProps = {},
   children,
+  ...rest
 }) => {
-  const realType = loading ? "grey" : type;
+  const realVariant = loading ? "grey" : variant;
 
   return (
-    <Button type={realType} buttonProps={{ disabled: loading, ...buttonProps }}>
-      {loading && <Spinner type={realType} />}
-      <Text type={realType}>{children}</Text>
+    <Button variant={realVariant} disabled={loading} {...rest}>
+      {loading && <Spinner variant={realVariant} />}
+      <Text variant={realVariant}>{children}</Text>
     </Button>
   );
 };

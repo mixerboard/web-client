@@ -1,12 +1,12 @@
 import { FC } from "react";
 
 interface Props {
-  type?: colors;
+  variant?: colors;
   level?: 1 | 2 | 3 | 4 | 5 | 6;
 }
 
-const Heading: FC<Props> = ({ type = "dark", level = 1, children }) => {
-  const cssColorVariable = `var(--color-${type})`;
+const Heading: FC<Props> = ({ variant = "dark", level = 1, children }) => {
+  const cssColorVariable = `var(--color-${variant})`;
 
   return (
     <>

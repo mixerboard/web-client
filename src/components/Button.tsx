@@ -1,20 +1,15 @@
 import { FC, ButtonHTMLAttributes } from "react";
 
-interface Props {
-  type?: colors;
-  buttonProps?: ButtonHTMLAttributes<HTMLButtonElement>;
+interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
+  variant?: colors;
 }
 
-const Button: FC<Props> = ({
-  type = "primary",
-  buttonProps = {},
-  children,
-}) => {
-  const cssColorVariable = `var(--color-${type})`;
+const Button: FC<Props> = ({ variant = "primary", children, ...rest }) => {
+  const cssColorVariable = `var(--color-${variant})`;
 
   return (
     <>
-      <button {...buttonProps}>{children}</button>
+      <button {...rest}>{children}</button>
       <style jsx>{`
         button {
           display: grid;

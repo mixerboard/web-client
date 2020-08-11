@@ -1,16 +1,19 @@
 import { FC } from "react";
 import Card from "components/Card";
 import Heading from "components/Heading";
-import Button from "components/Button";
-import Text from "components/Text";
-import AdvancedButton from "composites/AdvancedButton";
+import Button from "composites/AdvancedButton";
+import SpotifyButton from "composites/SpotifyButton";
 
 const HomePage: FC = () => {
   return (
     <>
       <Card>
         <Heading>Source</Heading>
-        <AdvancedButton loading>Test</AdvancedButton>
+        <SpotifyButton />
+        <br />
+        <SpotifyButton />
+        <br />
+        <Button>Test</Button>
       </Card>
     </>
   );
