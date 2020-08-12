@@ -2,36 +2,39 @@ import { FC, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Text from "components/Text";
 import Alert from "components/Alert";
-import Spotify from "services/Spotify";
+import api from "services/api";
 
 const CallbackPage: FC = () => {
   const [error, setError] = useState(null);
-  const { query } = useRouter();
+  const { query, push } = useRouter();
 
   useEffect(() => {
-    const musicServiceId = query.musicServiceId;
     setError(null);
+    const musicServiceId = query.musicServiceId;
 
     if (musicServiceId === "spotify") {
-      const authenticateSpotify = async () => {
+      (async () => {
         const code = query.code;
-        const spotifyInstance = new Spotify();
 
-        if (!code) {
-          setError("No code found");
-          return;
-        }
-
-        localStorage.setItem("spotifyCode", code.toString());
+        !code && setError("No code found");
 
         try {
-          await spotifyInstance.authenticate();
+          const {
+            data: { accessToken, refreshToken, expiresIn },
+          } = await api.post("/spotify/tokens", { code });
+
+          localStorage.setItem("spotifyAccessToken", accessToken);
+          localStorage.setItem("spotifyRefreshToken", refreshToken);
+          localStorage.setItem("spotifyExpiresIn", expiresIn);
+          localStorage.setItem("spotifyIsAuthenticated", "true");
+
+          push("/");
         } catch (e) {
           setError("Something broke");
         }
-      };
-
-      authenticateSpotify();
+      })();
+    } else {
+      setError("Invalid music service ID");
     }
   }, [query]);
 
