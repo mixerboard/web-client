@@ -1,5 +1,5 @@
 import { FC, Dispatch, SetStateAction } from "react";
-import SpotifyButton from "./SpotifyButton";
+import MusicServiceButtonSpotify from "./MusicServiceButtonSpotify";
 
 interface Props {
   selected: string;
@@ -14,7 +14,7 @@ const MusicServiceSelector: FC<Props> = ({ selected, setSelected }) => {
   return (
     <>
       <div>
-        <SpotifyButton
+        <MusicServiceButtonSpotify
           selected={selected === "spotify"}
           onClick={() => toggleSelected("spotify")}
         />

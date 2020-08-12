@@ -1,8 +1,8 @@
 import { FC, useState } from "react";
 import Card from "components/Card";
 import Heading from "components/Heading";
-import Button from "composites/AdvancedButton";
-import MusicServiceSelector from "composites/MusicServiceSelector";
+import Button from "composites/Button";
+import MusicServiceButtonSelector from "composites/MusicServiceButtonSelector";
 
 const HomePage: FC = () => {
   const [selectedSource, setSelectedSource] = useState("");
@@ -12,7 +12,7 @@ const HomePage: FC = () => {
     <>
       <Card>
         <Heading>Source</Heading>
-        <MusicServiceSelector
+        <MusicServiceButtonSelector
           selected={selectedSource}
           setSelected={setSelectedSource}
         />
@@ -20,7 +20,7 @@ const HomePage: FC = () => {
       </Card>
       <Card>
         <Heading>Target</Heading>
-        <MusicServiceSelector
+        <MusicServiceButtonSelector
           selected={selectedTarget}
           setSelected={setSelectedTarget}
         />
