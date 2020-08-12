@@ -18,6 +18,7 @@ const SpotifyButton: FC<Props> = ({ selected, onSelect, ...rest }) => {
       selected={selected}
       onClick={() => {
         onSelect();
+
         spotifyInstance.authenticate();
       }}
       {...rest}

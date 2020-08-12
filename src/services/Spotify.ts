@@ -1,17 +1,34 @@
 import MusicService from "./MusicService";
+import api from "./api";
 
 class Spotify extends MusicService {
-  authenticate(): void {
-    const spotifyStatus = JSON.parse(localStorage.getItem("spotify"));
+  async authenticate(): Promise<void> {
+    const isAuthenticated = localStorage.getItem("spotifyIsAuthenticated");
 
-    if (spotifyStatus?.isAuthenticated) {
+    if (isAuthenticated === "true") {
       return;
-    } else if (spotifyStatus?.code) {
-      // TODO: get token
-    } else {
-      api.get("/api");
-      // TODO: get code
     }
+
+    const code = localStorage.getItem("spotifyCode");
+
+    if (code) {
+      const {
+        data: { accessToken, refreshToken, expiresIn },
+      } = await api.post("/spotify/tokens", { code });
+
+      localStorage.setItem("spotifyAccessToken", accessToken);
+      localStorage.setItem("spotifyRefreshToken", refreshToken);
+      localStorage.setItem("spotifyExpiresIn", expiresIn);
+      localStorage.setItem("spotifyIsAuthenticated", "true");
+
+      return;
+    }
+
+    const {
+      data: { requestAuthUrl },
+    } = await api.get("/spotify/request-auth-url");
+
+    window.location = requestAuthUrl;
   }
 
   deauthenticate() {

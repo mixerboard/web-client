@@ -2,26 +2,42 @@ import { FC, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Text from "components/Text";
 import Alert from "components/Alert";
+import Spotify from "services/Spotify";
 
 const CallbackPage: FC = () => {
   const [error, setError] = useState(null);
   const { query } = useRouter();
 
   useEffect(() => {
+    const musicServiceId = query.musicServiceId;
     setError(null);
 
-    switch (query.musicServiceId) {
-      case "spotify":
-        console.log("id is spotify");
-        break;
-      default:
-        setError("Invalid music service ID.");
+    if (musicServiceId === "spotify") {
+      const authenticateSpotify = async () => {
+        const code = query.code;
+        const spotifyInstance = new Spotify();
+
+        if (!code) {
+          setError("No code found");
+          return;
+        }
+
+        localStorage.setItem("spotifyCode", code.toString());
+
+        try {
+          await spotifyInstance.authenticate();
+        } catch (e) {
+          setError("Something broke");
+        }
+      };
+
+      authenticateSpotify();
     }
   }, [query]);
 
   return error ? (
-    <Alert type="error">
-      <Text type="error">Error: {error}</Text>
+    <Alert variant="error">
+      <Text variant="error">Error: {error}</Text>
     </Alert>
   ) : (
     <Text>Authenticating, please wait...</Text>
