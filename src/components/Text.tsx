@@ -1,7 +1,7 @@
 import { FC } from "react";
 
 interface Props {
-  variant?: colors;
+  variant?: color;
 }
 
 const Text: FC<Props> = ({ variant = "dark", children }) => {

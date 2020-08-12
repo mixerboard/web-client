@@ -4,7 +4,7 @@ import Spinner from "components/Spinner";
 import Text from "components/Text";
 
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: colors;
+  variant?: color;
   loading?: boolean;
 }
 
@@ -14,7 +14,7 @@ const Button: FC<Props> = ({
   children,
   ...rest
 }) => {
-  const realVariant = loading ? "grey" : variant;
+  const realVariant = loading || rest.disabled ? "grey" : variant;
 
   return (
     <ButtonComponent variant={realVariant} disabled={loading} {...rest}>

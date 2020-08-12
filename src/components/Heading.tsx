@@ -1,7 +1,7 @@
 import { FC } from "react";
 
 interface Props {
-  variant?: colors;
+  variant?: color;
   level?: 1 | 2 | 3 | 4 | 5 | 6;
 }
 

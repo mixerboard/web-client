@@ -1,7 +1,7 @@
 import { FC, ButtonHTMLAttributes } from "react";
 
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: colors;
+  variant?: color;
 }
 
 const Button: FC<Props> = ({ variant = "primary", children, ...rest }) => {
