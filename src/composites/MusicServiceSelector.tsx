@@ -18,19 +18,16 @@ const MusicServiceSelector: FC<Props> = ({ selected, setSelected }) => {
           selected={selected === "spotify"}
           onClick={() => toggleSelected("spotify")}
         />
-        <SpotifyButton
-          selected={selected === "spotify"}
-          onClick={() => toggleSelected("spotify")}
-        />
-        <SpotifyButton
-          selected={selected === "spotify"}
-          onClick={() => toggleSelected("spotify")}
-        />
       </div>
       <style jsx>{`
         div {
-          max-width: 500px;
-          width: 100%;
+          display: grid;
+          grid-gap: var(--component-padding);
+          grid-template-columns: repeat(
+            auto-fit,
+            minmax(var(--music-service-button-size), 1fr)
+          );
+          justify-items: center;
         }
       `}</style>
     </>

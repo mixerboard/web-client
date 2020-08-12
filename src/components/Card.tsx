@@ -6,6 +6,8 @@ const Card: FC = ({ children }) => {
       <div>{children}</div>
       <style jsx>{`
         div {
+          display: grid;
+          grid-gap: var(--component-padding);
           border-radius: var(--component-border-radius);
           box-shadow: var(--component-box-shadow);
           padding: var(--component-padding);

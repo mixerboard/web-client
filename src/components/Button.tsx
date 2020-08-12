@@ -30,7 +30,7 @@ const Button: FC<Props> = ({ variant = "primary", children, ...rest }) => {
         }
 
         button:active {
-          background-color: white;
+          background-color: initial;
         }
 
         button:disabled {
