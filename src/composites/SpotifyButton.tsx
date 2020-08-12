@@ -1,19 +1,26 @@
-import { FC, useState } from "react";
-import MusicSourceButton from "components/MusicSourceButton";
+import { FC, ButtonHTMLAttributes } from "react";
+import MusicServiceButton from "components/MusicServiceButton";
 import { FaSpotify } from "react-icons/fa";
+import Spotify from "services/Spotify";
 
-const SpotifyButton: FC = () => {
-  const [selected, setSelected] = useState(false);
+interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
+  selected: boolean;
+  onSelect: () => void;
+}
+const SpotifyButton: FC<Props> = ({ selected, onSelect, ...rest }) => {
+  const spotifyInstance = new Spotify();
 
   return (
-    <MusicSourceButton
+    <MusicServiceButton
       icon={<FaSpotify />}
       name="Spotify"
       authenticated={true}
       selected={selected}
       onClick={() => {
-        setSelected(!selected);
+        onSelect();
+        spotifyInstance.authenticate();
       }}
+      {...rest}
     />
   );
 };
