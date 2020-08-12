@@ -30,7 +30,7 @@ const Heading: FC<Props> = ({ variant = "dark", level = 1, children }) => {
         h4,
         h5,
         h6 {
-          font-family: "IBM Plex Mono", monospace;
+          font-family: var(--font-secondary);
           color: ${cssColorVariable};
         }
       `}</style>

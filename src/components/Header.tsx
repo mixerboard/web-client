@@ -16,12 +16,11 @@ const Header: FC<Props> = ({ logoImage }) => {
       <style jsx>{`
         header {
           display: grid;
-          justify-content: center;
-          height: 3rem;
+          justify-items: center;
         }
 
         .logo-container {
-          height: 3rem;
+          height: var(--header-height);
         }
       `}</style>
     </>

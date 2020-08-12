@@ -19,7 +19,7 @@ const Spinner: FC<Props> = ({ variant = "primary" }) => {
           display: grid;
           align-items: center;
           justify-content: center;
-          animation: 2s spin infinite linear;
+          animation: var(--spinner-animation-length) spin infinite linear;
         }
 
         @keyframes spin {

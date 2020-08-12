@@ -6,6 +6,7 @@ import MusicServiceSelector from "composites/MusicServiceSelector";
 
 const HomePage: FC = () => {
   const [selectedSource, setSelectedSource] = useState("");
+  const [selectedTarget, setSelectedTarget] = useState("");
 
   return (
     <>
@@ -15,7 +16,15 @@ const HomePage: FC = () => {
           selected={selectedSource}
           setSelected={setSelectedSource}
         />
-        <Button>Test</Button>
+        <Button>Pull</Button>
+      </Card>
+      <Card>
+        <Heading>Target</Heading>
+        <MusicServiceSelector
+          selected={selectedTarget}
+          setSelected={setSelectedTarget}
+        />
+        <Button>Push</Button>
       </Card>
     </>
   );

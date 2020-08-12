@@ -50,12 +50,12 @@ const MusicSourceButton: FC<Props> = ({
 
         .container {
           position: relative;
-          width: 50px;
-          height: 50px;
+          width: var(--music-service-button-size);
+          height: var(--music-service-button-size);
         }
 
         .icon {
-          font-size: 50px;
+          font-size: var(--music-service-button-size);
           color: var(--color-dark);
         }
 
@@ -68,7 +68,7 @@ const MusicSourceButton: FC<Props> = ({
           justify-content: center;
           align-items: center;
 
-          font-size: 20px;
+          font-size: calc(var(--music-service-button-size) / 2.5);
           color: var(--color-success);
         }
       `}</style>

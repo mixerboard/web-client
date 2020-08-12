@@ -13,6 +13,7 @@ const Image: FC<Props> = ({ src, alt = "" }) => {
         img {
           width: 100%;
           height: 100%;
+          object-fit: contain;
         }
       `}</style>
     </>

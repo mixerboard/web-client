@@ -6,9 +6,11 @@ const Card: FC = ({ children }) => {
       <div>{children}</div>
       <style jsx>{`
         div {
-          padding: var(--component-padding);
           border-radius: var(--component-border-radius);
           box-shadow: var(--component-box-shadow);
+          padding: var(--component-padding);
+          max-width: var(--card-max-width);
+          width: 100%;
         }
       `}</style>
     </>
