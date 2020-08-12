@@ -1,17 +1,20 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import Card from "components/Card";
 import Heading from "components/Heading";
 import Button from "composites/AdvancedButton";
-import SpotifyButton from "composites/SpotifyButton";
+import MusicServiceSelector from "composites/MusicServiceSelector";
 
 const HomePage: FC = () => {
+  const [selectedSource, setSelectedSource] = useState("");
+
   return (
     <>
       <Card>
         <Heading>Source</Heading>
-        <br />
-        <SpotifyButton />
-        <br />
+        <MusicServiceSelector
+          selected={selectedSource}
+          setSelected={setSelectedSource}
+        />
         <Button>Test</Button>
       </Card>
     </>
