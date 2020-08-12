@@ -7,8 +7,9 @@ const Main: FC = ({ children }) => {
       <style jsx>{`
         main {
           display: grid;
-          justify-content: center;
-          margin: 2vw;
+          grid-gap: var(--component-padding);
+          justify-items: center;
+          margin: var(--main-margin);
         }
       `}</style>
     </>

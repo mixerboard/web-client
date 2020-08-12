@@ -1,7 +1,7 @@
 import { FC } from "react";
 
 interface Props {
-  variant?: colors;
+  variant?: color;
 }
 
 const Alert: FC<Props> = ({ variant = "primary", children }) => {

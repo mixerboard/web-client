@@ -1,7 +1,7 @@
 import { FC, ButtonHTMLAttributes } from "react";
 
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: colors;
+  variant?: color;
 }
 
 const Button: FC<Props> = ({ variant = "primary", children, ...rest }) => {
@@ -14,13 +14,13 @@ const Button: FC<Props> = ({ variant = "primary", children, ...rest }) => {
         button {
           display: grid;
           grid-auto-flow: column;
-          grid-gap: calc(var(--component-padding) / 2);
+          grid-gap: var(--component-padding);
 
+          background-color: white;
           color: ${cssColorVariable};
           border: var(--component-border) ${cssColorVariable};
-          padding: calc(var(--component-padding) / 2);
+          padding: var(--component-padding);
           border-radius: var(--component-border-radius);
-          background-color: white;
           transition: var(--component-transition);
         }
 
@@ -30,14 +30,14 @@ const Button: FC<Props> = ({ variant = "primary", children, ...rest }) => {
         }
 
         button:active {
-          background-color: white;
+          background-color: initial;
         }
 
         button:disabled {
           color: var(--color-grey);
           border-color: var(--color-grey);
-          box-shadow: initial;
           cursor: not-allowed;
+          box-shadow: initial;
         }
       `}</style>
     </>

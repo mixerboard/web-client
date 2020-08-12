@@ -27,11 +27,18 @@ const MusicSourceButton: FC<Props> = ({
         </span>
       </button>
       <style jsx>{`
+        --icon-container-size: calc(var(--music-service-button-size) / 2);
+        --icon-checkmark-size: calc(var(--icon-container-size) / 2.5);
+
         button {
           display: grid;
+          justify-items: center;
+          align-items: center;
           border: none;
           padding: var(--component-padding);
           transition: var(--component-transition);
+          width: var(--music-service-button-size);
+          height: var(--music-service-button-size);
           background-color: white;
         }
 
@@ -41,34 +48,31 @@ const MusicSourceButton: FC<Props> = ({
         }
 
         button:active {
-          background-color: white;
+          background-color: initial;
         }
 
         .selected {
           box-shadow: var(--component-box-shadow);
+          border: var(--component-border) var(--color-dark);
         }
 
         .container {
           position: relative;
-          width: 50px;
-          height: 50px;
+          width: var(--icon-container-size);
+          height: var(--icon-container-size);
         }
 
         .icon {
-          font-size: 50px;
+          font-size: var(--icon-container-size);
           color: var(--color-dark);
         }
 
         .authenticated-checkmark {
+          display: grid;
           position: absolute;
           right: 0;
           bottom: 0;
-
-          display: grid;
-          justify-content: center;
-          align-items: center;
-
-          font-size: 20px;
+          font-size: var(--icon-checkmark-size);
           color: var(--color-success);
         }
       `}</style>

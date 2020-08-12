@@ -1,7 +1,7 @@
 import { FC } from "react";
 
 interface Props {
-  variant?: colors;
+  variant?: color;
 }
 
 const Text: FC<Props> = ({ variant = "dark", children }) => {
@@ -12,7 +12,7 @@ const Text: FC<Props> = ({ variant = "dark", children }) => {
       <p>{children}</p>
       <style jsx>{`
         p {
-          font-family: "IBM Plex Sans", sans-serif;
+          font-family: var(--font-primary);
           color: ${cssColorVariable};
         }
       `}</style>

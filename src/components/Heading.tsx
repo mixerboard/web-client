@@ -1,7 +1,7 @@
 import { FC } from "react";
 
 interface Props {
-  variant?: colors;
+  variant?: color;
   level?: 1 | 2 | 3 | 4 | 5 | 6;
 }
 
@@ -30,7 +30,7 @@ const Heading: FC<Props> = ({ variant = "dark", level = 1, children }) => {
         h4,
         h5,
         h6 {
-          font-family: "IBM Plex Mono", monospace;
+          font-family: var(--font-secondary);
           color: ${cssColorVariable};
         }
       `}</style>

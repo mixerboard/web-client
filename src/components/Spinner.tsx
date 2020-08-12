@@ -2,7 +2,7 @@ import { RiLoader4Line } from "react-icons/ri";
 import { FC } from "react";
 
 interface Props {
-  variant?: colors;
+  variant?: color;
 }
 
 const Spinner: FC<Props> = ({ variant = "primary" }) => {
@@ -19,7 +19,7 @@ const Spinner: FC<Props> = ({ variant = "primary" }) => {
           display: grid;
           align-items: center;
           justify-content: center;
-          animation: 2s spin infinite linear;
+          animation: var(--spinner-animation-length) spin infinite linear;
         }
 
         @keyframes spin {

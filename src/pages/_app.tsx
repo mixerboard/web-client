@@ -12,6 +12,9 @@ const CustomApp: FC<AppProps> = ({ Component, pageProps }) => {
         @import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=IBM+Plex+Sans&display=swap");
 
         :root {
+          --font-primary: "IBM Plex Sans", sans-serif;
+          --font-secondary: "IBM Plex Mono", monospace;
+
           --color-primary: #8cbce9;
           --color-error: #ff8f85ff;
           --color-success: #75e6cfff;
@@ -23,7 +26,13 @@ const CustomApp: FC<AppProps> = ({ Component, pageProps }) => {
           --component-border: 2px solid;
           --component-border-radius: 0px;
           --component-padding: 15px;
-          --component-transition: all 0.2s;
+          --component-transition: all 0.1s;
+
+          --card-max-width: 500px;
+          --header-height: 3rem;
+          --main-margin: 2vw;
+          --music-service-button-size: 80px;
+          --spinner-animation-length: 2s;
         }
 
         * {
