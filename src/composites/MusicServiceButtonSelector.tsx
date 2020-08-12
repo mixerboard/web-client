@@ -6,7 +6,7 @@ interface Props {
   setSelected: Dispatch<SetStateAction<string>>;
 }
 
-const MusicServiceSelector: FC<Props> = ({ selected, setSelected }) => {
+const MusicServiceButtonSelector: FC<Props> = ({ selected, setSelected }) => {
   const toggleSelected = (newSelection: string) => {
     setSelected(selected === newSelection ? "" : newSelection);
   };
@@ -34,4 +34,4 @@ const MusicServiceSelector: FC<Props> = ({ selected, setSelected }) => {
   );
 };
 
-export default MusicServiceSelector;
+export default MusicServiceButtonSelector;

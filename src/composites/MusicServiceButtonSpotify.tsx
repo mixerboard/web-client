@@ -7,7 +7,7 @@ interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   selected: boolean;
 }
 
-const SpotifyButton: FC<Props> = ({ selected, ...rest }) => {
+const MusicServiceButtonSpotify: FC<Props> = ({ selected, ...rest }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
@@ -38,4 +38,4 @@ const SpotifyButton: FC<Props> = ({ selected, ...rest }) => {
   );
 };
 
-export default SpotifyButton;
+export default MusicServiceButtonSpotify;

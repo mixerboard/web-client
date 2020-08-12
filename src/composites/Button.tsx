@@ -1,5 +1,5 @@
 import { FC, ButtonHTMLAttributes } from "react";
-import Button from "components/Button";
+import ButtonComponent from "components/Button";
 import Spinner from "components/Spinner";
 import Text from "components/Text";
 
@@ -8,7 +8,7 @@ interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   loading?: boolean;
 }
 
-const AdvancedButton: FC<Props> = ({
+const Button: FC<Props> = ({
   variant = "primary",
   loading = false,
   children,
@@ -17,11 +17,11 @@ const AdvancedButton: FC<Props> = ({
   const realVariant = loading ? "grey" : variant;
 
   return (
-    <Button variant={realVariant} disabled={loading} {...rest}>
+    <ButtonComponent variant={realVariant} disabled={loading} {...rest}>
       {loading && <Spinner variant={realVariant} />}
       <Text variant={realVariant}>{children}</Text>
-    </Button>
+    </ButtonComponent>
   );
 };
 
-export default AdvancedButton;
+export default Button;
