@@ -16,7 +16,7 @@ const MusicServiceSelector: FC<Props> = ({ selected, setSelected }) => {
       <div className="container">
         <SpotifyButton
           selected={selected === "spotify"}
-          onSelect={() => toggleSelected("spotify")}
+          onClick={() => toggleSelected("spotify")}
         />
       </div>
     </>

@@ -5,27 +5,21 @@ import api from "services/api";
 
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   selected: boolean;
-  onSelect: () => void;
 }
-const SpotifyButton: FC<Props> = ({ selected, onSelect, ...rest }) => {
+
+const SpotifyButton: FC<Props> = ({ selected, ...rest }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
-    setIsAuthenticated(
-      localStorage.getItem("spotifyIsAuthenticated") === "true"
-    );
+    setIsAuthenticated(!!localStorage.getItem("spotifyAccessToken"));
   }, []);
 
   const authenticate = async () => {
-    if (isAuthenticated) {
-      return;
-    } else {
-      const {
-        data: { requestAuthUrl },
-      } = await api.get("/spotify/request-auth-url");
+    const {
+      data: { requestAuthUrl },
+    } = await api.get("/spotify/request-auth-url");
 
-      window.location = requestAuthUrl;
-    }
+    window.location = requestAuthUrl;
   };
 
   return (
@@ -34,11 +28,11 @@ const SpotifyButton: FC<Props> = ({ selected, onSelect, ...rest }) => {
       name="Spotify"
       authenticated={isAuthenticated}
       selected={selected}
-      onClick={() => {
-        onSelect();
-        authenticate();
-      }}
       {...rest}
+      onClick={(e) => {
+        rest.onClick(e);
+        !isAuthenticated && authenticate();
+      }}
     />
   );
 };

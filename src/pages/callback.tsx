@@ -9,14 +9,14 @@ const CallbackPage: FC = () => {
   const { query, push } = useRouter();
 
   useEffect(() => {
-    setError(null);
-    const musicServiceId = query.musicServiceId;
+    (async () => {
+      setError(null);
+      const musicServiceId = query.musicServiceId;
 
-    if (musicServiceId === "spotify") {
-      (async () => {
+      if (musicServiceId === "spotify") {
         const code = query.code;
 
-        !code && setError("No code found");
+        !code && setError("No authentication code found");
 
         try {
           const {
@@ -26,16 +26,15 @@ const CallbackPage: FC = () => {
           localStorage.setItem("spotifyAccessToken", accessToken);
           localStorage.setItem("spotifyRefreshToken", refreshToken);
           localStorage.setItem("spotifyExpiresIn", expiresIn);
-          localStorage.setItem("spotifyIsAuthenticated", "true");
 
           push("/");
         } catch (e) {
           setError("Something broke");
         }
-      })();
-    } else {
-      setError("Invalid music service ID");
-    }
+      } else {
+        setError("Invalid music service ID");
+      }
+    })();
   }, [query]);
 
   return error ? (
