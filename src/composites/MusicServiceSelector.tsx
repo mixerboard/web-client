@@ -18,6 +18,14 @@ const MusicServiceSelector: FC<Props> = ({ selected, setSelected }) => {
           selected={selected === "spotify"}
           onClick={() => toggleSelected("spotify")}
         />
+        <SpotifyButton
+          selected={selected === "spotify"}
+          onClick={() => toggleSelected("spotify")}
+        />
+        <SpotifyButton
+          selected={selected === "spotify"}
+          onClick={() => toggleSelected("spotify")}
+        />
       </div>
     </>
   );
