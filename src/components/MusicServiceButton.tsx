@@ -31,18 +31,21 @@ const MusicSourceButton: FC<Props> = ({
           display: grid;
           border: none;
           padding: var(--component-padding);
-          background-color: white;
-          box-shadow: var(--component-box-shadow);
           transition: var(--component-transition);
+          background-color: white;
         }
 
         button:hover {
           background-color: var(--color-light);
+          box-shadow: var(--component-box-shadow);
+        }
+
+        button:active {
+          background-color: white;
         }
 
         .selected {
-          outline: var(--component-border) var(--color-primary);
-          box-shadow: inset var(--component-box-shadow);
+          box-shadow: var(--component-box-shadow);
         }
 
         .container {

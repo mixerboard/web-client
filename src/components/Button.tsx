@@ -17,16 +17,20 @@ const Button: FC<Props> = ({ variant = "primary", children, ...rest }) => {
           grid-gap: calc(var(--component-padding) / 2);
 
           color: ${cssColorVariable};
-          background-color: white;
           border: var(--component-border) ${cssColorVariable};
           padding: calc(var(--component-padding) / 2);
           border-radius: var(--component-border-radius);
+          background-color: white;
           transition: var(--component-transition);
         }
 
-        button:hover,
-        button:active {
+        button:hover {
+          background-color: var(--color-light);
           box-shadow: var(--component-box-shadow);
+        }
+
+        button:active {
+          background-color: white;
         }
 
         button:disabled {
