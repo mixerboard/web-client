@@ -53,6 +53,7 @@ const MusicSourceButton: FC<Props> = ({
 
         .selected {
           box-shadow: var(--component-box-shadow);
+          border: var(--component-border) var(--color-dark);
         }
 
         .container {

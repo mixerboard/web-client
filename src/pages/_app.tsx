@@ -26,7 +26,7 @@ const CustomApp: FC<AppProps> = ({ Component, pageProps }) => {
           --component-border: 2px solid;
           --component-border-radius: 0px;
           --component-padding: 15px;
-          --component-transition: all 0.2s;
+          --component-transition: all 0.1s;
 
           --card-max-width: 500px;
           --header-height: 3rem;
