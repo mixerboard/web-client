@@ -11,16 +11,29 @@ const MusicServiceButtonSpotify: FC<Props> = ({ selected, ...rest }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
-    const spotifyAccessToken = localStorage.getItem("spotifyAccessToken");
-    setIsAuthenticated(!!spotifyAccessToken);
+    setIsAuthenticated(checkIsAuthenticated());
   }, []);
 
-  const authenticate = async () => {
-    const {
-      data: { requestAuthUrl },
-    } = await api.get("/spotify/request-auth-url");
+  const checkIsAuthenticated = () => {
+    const spotifyAccessToken = localStorage.getItem("spotifyAccessToken");
+    const spotifyAccessTokenExpireTime = parseInt(
+      localStorage.getItem("spotifyAccessTokenExpireTime")
+    );
+    const currentTime = new Date().getTime() / 1000;
+    const tokenExpired = spotifyAccessTokenExpireTime < currentTime;
+    const isAuthenticated = spotifyAccessToken && !tokenExpired;
 
-    requestAuthUrl && window.location.replace(requestAuthUrl);
+    return isAuthenticated;
+  };
+
+  const authenticate = async () => {
+    if (!checkIsAuthenticated()) {
+      const {
+        data: { requestAuthUrl },
+      } = await api.get("/spotify/request-auth-url");
+
+      requestAuthUrl && window.location.replace(requestAuthUrl);
+    }
   };
 
   return (
@@ -31,8 +44,8 @@ const MusicServiceButtonSpotify: FC<Props> = ({ selected, ...rest }) => {
       selected={selected}
       {...rest}
       onClick={async (e) => {
+        await authenticate();
         rest.onClick(e);
-        !isAuthenticated && authenticate();
       }}
     />
   );
