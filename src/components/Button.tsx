@@ -14,7 +14,9 @@ const Button: FC<Props> = ({ variant = "primary", children, ...rest }) => {
         button {
           display: grid;
           grid-auto-flow: column;
+          grid-auto-columns: min-content;
           grid-gap: var(--component-padding);
+          justify-content: center;
 
           background-color: white;
           color: ${cssColorVariable};
@@ -30,7 +32,7 @@ const Button: FC<Props> = ({ variant = "primary", children, ...rest }) => {
         }
 
         button:active {
-          background-color: initial;
+          background-color: white;
         }
 
         button:disabled {
