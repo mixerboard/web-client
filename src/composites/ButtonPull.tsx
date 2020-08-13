@@ -4,7 +4,7 @@ import api from "services/api";
 
 interface Props {
   musicServiceId: musicServiceId | null;
-  setLibrary: Dispatch<SetStateAction<Record<string, unknown>>>;
+  setLibrary: Dispatch<SetStateAction<Library>>;
 }
 
 const ButtonPull: FC<Props> = ({ musicServiceId, setLibrary }) => {
@@ -22,7 +22,6 @@ const ButtonPull: FC<Props> = ({ musicServiceId, setLibrary }) => {
         },
       });
 
-      console.log(library);
       setLibrary(library);
       setLoading(false);
     }

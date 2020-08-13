@@ -6,18 +6,25 @@ import Text from "components/Text";
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: color;
   loading?: boolean;
+  link?: boolean;
 }
 
 const Button: FC<Props> = ({
   variant = "primary",
   loading = false,
+  link = false,
   children,
   ...rest
 }) => {
   const realVariant = loading || rest.disabled ? "grey" : variant;
 
   return (
-    <ButtonComponent variant={realVariant} disabled={loading} {...rest}>
+    <ButtonComponent
+      variant={realVariant}
+      link={link}
+      {...rest}
+      disabled={loading || rest.disabled}
+    >
       {loading && <Spinner variant={realVariant} />}
       <Text variant={realVariant}>{children}</Text>
     </ButtonComponent>
