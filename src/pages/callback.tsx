@@ -20,12 +20,14 @@ const CallbackPage: FC = () => {
 
         try {
           const {
-            data: { accessToken, refreshToken, expiresIn },
+            data: { accessToken, expiresIn },
           } = await api.post("/spotify/tokens", { code });
 
           localStorage.setItem("spotifyAccessToken", accessToken);
-          localStorage.setItem("spotifyRefreshToken", refreshToken);
-          localStorage.setItem("spotifyExpiresIn", expiresIn);
+          localStorage.setItem(
+            "spotifyAccessTokenExpireTime",
+            new Date().getTime() / 1000 + expiresIn
+          );
 
           push("/");
         } catch (e) {
