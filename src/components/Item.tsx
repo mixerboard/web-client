@@ -21,7 +21,6 @@ const Item: FC<Props> = ({ onDelete, children }) => {
           display: grid;
           grid-auto-flow: column;
           grid-auto-columns: 1fr min-content;
-          align-items: center;
           box-shadow: var(--component-box-shadow);
           border-radius: var(--component-border-radius);
         }
@@ -45,6 +44,7 @@ const Item: FC<Props> = ({ onDelete, children }) => {
 
         button:hover {
           background-color: var(--color-error);
+          box-shadow: inset var(--component-box-shadow);
         }
       `}</style>
     </>
