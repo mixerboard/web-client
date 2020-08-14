@@ -1,5 +1,5 @@
 type color = "primary" | "error" | "success" | "light" | "dark" | "grey";
-type musicServiceId = "spotify";
+type musicServiceId = "spotify" | "json";
 
 interface Track {
   id: string;
@@ -23,4 +23,9 @@ interface Library {
   tracks: Track[];
   albums: Album[];
   playlists: Playlist[];
+}
+
+interface PushResult {
+  pushed: Library;
+  failed: Library;
 }

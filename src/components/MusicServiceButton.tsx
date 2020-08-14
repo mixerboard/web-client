@@ -7,7 +7,7 @@ interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   authenticated?: boolean;
   selected?: boolean;
 }
-const MusicSourceButton: FC<Props> = ({
+const MusicServiceButton: FC<Props> = ({
   name,
   icon,
   authenticated = false,
@@ -36,6 +36,7 @@ const MusicSourceButton: FC<Props> = ({
           align-items: center;
           border: none;
           padding: var(--component-padding);
+          border-radius: var(--component-border-radius);
           transition: var(--component-transition);
           width: var(--music-service-button-size);
           height: var(--music-service-button-size);
@@ -80,4 +81,4 @@ const MusicSourceButton: FC<Props> = ({
   );
 };
 
-export default MusicSourceButton;
+export default MusicServiceButton;

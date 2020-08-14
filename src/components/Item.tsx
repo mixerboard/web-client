@@ -10,9 +10,11 @@ const Item: FC<Props> = ({ onDelete, children }) => {
     <>
       <div>
         <span>{children}</span>
-        <button onClick={onDelete}>
-          <MdClose />
-        </button>
+        {onDelete && (
+          <button onClick={onDelete}>
+            <MdClose />
+          </button>
+        )}
       </div>
       <style jsx>{`
         div {
@@ -20,12 +22,13 @@ const Item: FC<Props> = ({ onDelete, children }) => {
           grid-auto-flow: column;
           grid-auto-columns: 1fr min-content;
           align-items: center;
-
           box-shadow: var(--component-box-shadow);
+          border-radius: var(--component-border-radius);
         }
 
         span {
           padding: calc(var(--component-padding) / 2);
+          overflow: hidden;
         }
 
         button {
@@ -34,8 +37,10 @@ const Item: FC<Props> = ({ onDelete, children }) => {
           display: grid;
           justify-content: center;
           align-items: center;
-          border: none;
           background-color: white;
+          border-radius: var(--component-border-radius);
+          transition: var(--component-transition);
+          border: none;
         }
 
         button:hover {
