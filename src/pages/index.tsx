@@ -10,7 +10,6 @@ const HomePage: FC = () => {
   const [selectedSource, setSelectedSource] = useState<musicServiceId | null>();
   const [library, setLibrary] = useState<Library>();
   const [selectedTarget, setSelectedTarget] = useState<musicServiceId | null>();
-  // const [result, setResult] = useState();
 
   useEffect(() => console.log(library), [library]);
   return (

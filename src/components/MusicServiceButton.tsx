@@ -7,7 +7,7 @@ interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   authenticated?: boolean;
   selected?: boolean;
 }
-const MusicSourceButton: FC<Props> = ({
+const MusicServiceButton: FC<Props> = ({
   name,
   icon,
   authenticated = false,
@@ -80,4 +80,4 @@ const MusicSourceButton: FC<Props> = ({
   );
 };
 
-export default MusicSourceButton;
+export default MusicServiceButton;

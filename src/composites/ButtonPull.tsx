@@ -24,6 +24,8 @@ const ButtonPull: FC<Props> = ({ musicServiceId, setLibrary }) => {
 
       setLibrary(library);
       setLoading(false);
+    } else if (musicServiceId === "json") {
+      setLibrary(JSON.parse(localStorage.getItem("jsonInput")));
     }
   };
 

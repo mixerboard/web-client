@@ -1,5 +1,5 @@
 type color = "primary" | "error" | "success" | "light" | "dark" | "grey";
-type musicServiceId = "spotify";
+type musicServiceId = "spotify" | "json";
 
 interface Track {
   id: string;
