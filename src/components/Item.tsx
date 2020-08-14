@@ -10,9 +10,11 @@ const Item: FC<Props> = ({ onDelete, children }) => {
     <>
       <div>
         <span>{children}</span>
-        <button onClick={onDelete}>
-          <MdClose />
-        </button>
+        {onDelete && (
+          <button onClick={onDelete}>
+            <MdClose />
+          </button>
+        )}
       </div>
       <style jsx>{`
         div {

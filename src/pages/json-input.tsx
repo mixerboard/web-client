@@ -24,7 +24,7 @@ const JsonInputPage: NextPage = () => {
 
   return (
     <Card>
-      <Heading>Json Input</Heading>
+      <Heading>JSON Input</Heading>
       <textarea
         value={jsonInput}
         onChange={(e) => setJsonInput(e.target.value)}

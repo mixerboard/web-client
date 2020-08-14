@@ -24,7 +24,7 @@ const CustomApp: FC<AppProps> = ({ Component, pageProps }) => {
 
           --component-box-shadow: 0 0 2px var(--color-grey);
           --component-border: 2px solid;
-          --component-border-radius: 0px;
+          --component-border-radius: 5px;
           --component-padding: 15px;
           --component-transition: all 0.1s;
 

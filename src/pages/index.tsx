@@ -5,11 +5,13 @@ import Button from "composites/Button";
 import MusicServiceButtonSelector from "composites/MusicServiceButtonSelector";
 import ButtonPull from "composites/ButtonPull";
 import Library from "composites/Library";
+import ButtonPush from "composites/ButtonPush";
 
 const HomePage: FC = () => {
   const [selectedSource, setSelectedSource] = useState<musicServiceId | null>();
   const [library, setLibrary] = useState<Library>();
   const [selectedTarget, setSelectedTarget] = useState<musicServiceId | null>();
+  const [uploadResult, setUploadResult] = useState<UploadResult>();
 
   useEffect(() => console.log(library), [library]);
   return (
@@ -23,19 +25,32 @@ const HomePage: FC = () => {
         <ButtonPull musicServiceId={selectedSource} setLibrary={setLibrary} />
       </Card>
       {library && (
-        <Card>
-          <Heading>Library</Heading>
-          <Library library={library} setLibrary={setLibrary} />
-        </Card>
+        <>
+          <Card>
+            <Heading>Library</Heading>
+            <Library library={library} setLibrary={setLibrary} />
+          </Card>
+
+          <Card>
+            <Heading>Target</Heading>
+            <MusicServiceButtonSelector
+              selected={selectedTarget}
+              setSelected={setSelectedTarget}
+            />
+            <ButtonPush
+              musicServiceId={selectedTarget}
+              library={library}
+              setUploadResult={setUploadResult}
+            />
+          </Card>
+        </>
       )}
-      {library && (
+      {uploadResult && (
         <Card>
-          <Heading>Target</Heading>
-          <MusicServiceButtonSelector
-            selected={selectedTarget}
-            setSelected={setSelectedTarget}
-          />
-          <Button>Push</Button>
+          <Heading variant="success">Uploaded Items</Heading>
+          <Library library={uploadResult.uploaded} />
+          <Heading variant="error">Failed Items</Heading>
+          <Library library={uploadResult.failed} />
         </Card>
       )}
     </>

@@ -10,7 +10,7 @@ const ItemList: FC<Props> = ({ items, cutoff }) => {
   const [expanded, setExpanded] = useState(false);
 
   if (items.length === 0) {
-    return <Alert variant="error">No items</Alert>;
+    return <Alert variant="grey">No items</Alert>;
   }
 
   return (

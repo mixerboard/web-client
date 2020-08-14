@@ -24,3 +24,8 @@ interface Library {
   albums: Album[];
   playlists: Playlist[];
 }
+
+interface UploadResult {
+  uploaded: Library;
+  failed: Library;
+}
