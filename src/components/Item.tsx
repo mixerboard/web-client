@@ -23,6 +23,7 @@ const Item: FC<Props> = ({ onDelete, children }) => {
           grid-auto-columns: 1fr min-content;
           align-items: center;
           box-shadow: var(--component-box-shadow);
+          border-radius: var(--component-border-radius);
         }
 
         span {
@@ -37,6 +38,8 @@ const Item: FC<Props> = ({ onDelete, children }) => {
           justify-content: center;
           align-items: center;
           background-color: white;
+          border-radius: var(--component-border-radius);
+          transition: var(--component-transition);
           border: none;
         }
 
