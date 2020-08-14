@@ -22,7 +22,6 @@ const Item: FC<Props> = ({ onDelete, children }) => {
           grid-auto-flow: column;
           grid-auto-columns: 1fr min-content;
           align-items: center;
-
           box-shadow: var(--component-box-shadow);
         }
 
@@ -37,8 +36,8 @@ const Item: FC<Props> = ({ onDelete, children }) => {
           display: grid;
           justify-content: center;
           align-items: center;
-          border: none;
           background-color: white;
+          border: none;
         }
 
         button:hover {

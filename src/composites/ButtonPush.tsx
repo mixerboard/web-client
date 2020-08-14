@@ -4,14 +4,10 @@ import Button from "./Button";
 interface Props {
   musicServiceId: musicServiceId | null;
   library: Library;
-  setUploadResult: Dispatch<SetStateAction<UploadResult>>;
+  setPushResult: Dispatch<SetStateAction<PushResult>>;
 }
 
-const ButtonPush: FC<Props> = ({
-  musicServiceId,
-  library,
-  setUploadResult,
-}) => {
+const ButtonPush: FC<Props> = ({ musicServiceId, library, setPushResult }) => {
   const [loading, setLoading] = useState(false);
 
   const handleClick = () => {
@@ -21,8 +17,8 @@ const ButtonPush: FC<Props> = ({
       localStorage.setItem("jsonInput", JSON.stringify(library));
 
       // Because JSON is local, all items upload successfully
-      setUploadResult({
-        uploaded: library,
+      setPushResult({
+        pushed: library,
         failed: { albums: [], tracks: [], playlists: [] },
       });
     }

@@ -1,17 +1,17 @@
 import { FC, useState, useEffect } from "react";
 import Card from "components/Card";
 import Heading from "components/Heading";
-import Button from "composites/Button";
 import MusicServiceButtonSelector from "composites/MusicServiceButtonSelector";
 import ButtonPull from "composites/ButtonPull";
 import Library from "composites/Library";
 import ButtonPush from "composites/ButtonPush";
+import PushResult from "composites/PushResult";
 
 const HomePage: FC = () => {
   const [selectedSource, setSelectedSource] = useState<musicServiceId | null>();
   const [library, setLibrary] = useState<Library>();
   const [selectedTarget, setSelectedTarget] = useState<musicServiceId | null>();
-  const [uploadResult, setUploadResult] = useState<UploadResult>();
+  const [pushResult, setPushResult] = useState<PushResult>();
 
   useEffect(() => console.log(library), [library]);
   return (
@@ -40,17 +40,15 @@ const HomePage: FC = () => {
             <ButtonPush
               musicServiceId={selectedTarget}
               library={library}
-              setUploadResult={setUploadResult}
+              setPushResult={setPushResult}
             />
           </Card>
         </>
       )}
-      {uploadResult && (
+      {pushResult && (
         <Card>
-          <Heading variant="success">Uploaded Items</Heading>
-          <Library library={uploadResult.uploaded} />
-          <Heading variant="error">Failed Items</Heading>
-          <Library library={uploadResult.failed} />
+          <Heading>Push Result</Heading>
+          <PushResult result={pushResult} />
         </Card>
       )}
     </>

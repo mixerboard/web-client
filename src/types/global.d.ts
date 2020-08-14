@@ -25,7 +25,7 @@ interface Library {
   playlists: Playlist[];
 }
 
-interface UploadResult {
-  uploaded: Library;
+interface PushResult {
+  pushed: Library;
   failed: Library;
 }

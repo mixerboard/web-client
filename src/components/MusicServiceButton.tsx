@@ -36,6 +36,7 @@ const MusicServiceButton: FC<Props> = ({
           align-items: center;
           border: none;
           padding: var(--component-padding);
+          border-radius: var(--component-border-radius);
           transition: var(--component-transition);
           width: var(--music-service-button-size);
           height: var(--music-service-button-size);
