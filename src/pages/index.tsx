@@ -8,11 +8,7 @@ import Library from "composites/Library";
 
 const HomePage: FC = () => {
   const [selectedSource, setSelectedSource] = useState<musicServiceId | null>();
-  const [library, setLibrary] = useState<Library>({
-    tracks: [],
-    albums: [],
-    playlists: [],
-  });
+  const [library, setLibrary] = useState<Library>();
   const [selectedTarget, setSelectedTarget] = useState<musicServiceId | null>();
   // const [result, setResult] = useState();
 
@@ -27,18 +23,22 @@ const HomePage: FC = () => {
         />
         <ButtonPull musicServiceId={selectedSource} setLibrary={setLibrary} />
       </Card>
-      <Card>
-        <Heading>Library</Heading>
-        <Library library={library} setLibrary={setLibrary} />
-      </Card>
-      <Card>
-        <Heading>Target</Heading>
-        <MusicServiceButtonSelector
-          selected={selectedTarget}
-          setSelected={setSelectedTarget}
-        />
-        <Button>Push</Button>
-      </Card>
+      {library && (
+        <Card>
+          <Heading>Library</Heading>
+          <Library library={library} setLibrary={setLibrary} />
+        </Card>
+      )}
+      {library && (
+        <Card>
+          <Heading>Target</Heading>
+          <MusicServiceButtonSelector
+            selected={selectedTarget}
+            setSelected={setSelectedTarget}
+          />
+          <Button>Push</Button>
+        </Card>
+      )}
     </>
   );
 };

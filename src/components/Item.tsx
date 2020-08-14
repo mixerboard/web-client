@@ -26,6 +26,7 @@ const Item: FC<Props> = ({ onDelete, children }) => {
 
         span {
           padding: calc(var(--component-padding) / 2);
+          overflow: hidden;
         }
 
         button {
