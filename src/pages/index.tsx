@@ -10,9 +10,9 @@ import Button from "composites/Button";
 
 const HomePage: FC = () => {
   const [selectedSource, setSelectedSource] = useState<musicServiceId | null>();
-  const [library, setLibrary] = useState<Library>();
+  const [library, setLibrary] = useState<Library | null>();
   const [selectedTarget, setSelectedTarget] = useState<musicServiceId | null>();
-  const [pushResult, setPushResult] = useState<PushResult>();
+  const [pushResult, setPushResult] = useState<PushResult | null>();
 
   const reset = () => {
     localStorage.removeItem("jsonInput");
@@ -63,8 +63,8 @@ const HomePage: FC = () => {
         </Card>
       )}
       <Card>
-        <Button variant="error" onClick={reset}>
-          Reset
+        <Button onClick={reset} variant={pushResult ? "primary" : "error"}>
+          {pushResult ? "Finish" : "Reset"}
         </Button>
       </Card>
     </>

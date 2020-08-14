@@ -16,16 +16,21 @@ const ButtonPull: FC<Props> = ({ musicServiceId, setLibrary }) => {
     if (musicServiceId === "spotify") {
       setLoading(true);
 
-      const {
-        data: { library },
-      } = await api.get("/spotify/library", {
-        headers: {
-          Authorization: localStorage.getItem("spotifyAccessToken"),
-        },
-      });
+      try {
+        const {
+          data: { library },
+        } = await api.get("/spotify/library", {
+          headers: {
+            Authorization: localStorage.getItem("spotifyAccessToken"),
+          },
+        });
 
-      setLibrary(library);
-      setLoading(false);
+        setLibrary(library);
+      } catch (e) {
+        console.error(e);
+      } finally {
+        setLoading(false);
+      }
     } else if (musicServiceId === "json") {
       const parsedJsonInput = JSON.parse(localStorage.getItem("jsonInput"));
 

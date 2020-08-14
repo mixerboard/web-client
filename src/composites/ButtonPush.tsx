@@ -1,5 +1,6 @@
 import { FC, useState, SetStateAction, Dispatch } from "react";
 import Button from "./Button";
+import { useRouter } from "next/router";
 
 interface Props {
   musicServiceId: musicServiceId | null;
@@ -8,6 +9,7 @@ interface Props {
 }
 
 const ButtonPush: FC<Props> = ({ musicServiceId, library, setPushResult }) => {
+  const { push } = useRouter();
   const [loading, setLoading] = useState(false);
 
   const handleClick = () => {
@@ -15,12 +17,7 @@ const ButtonPush: FC<Props> = ({ musicServiceId, library, setPushResult }) => {
       return;
     } else if (musicServiceId === "json") {
       localStorage.setItem("jsonInput", JSON.stringify(library));
-
-      // Because JSON is local, all items upload successfully
-      setPushResult({
-        pushed: library,
-        failed: { albums: [], tracks: [], playlists: [] },
-      });
+      push("/json-output");
     }
   };
 

@@ -14,6 +14,7 @@ const Text: FC<Props> = ({ variant = "dark", children }) => {
         p {
           font-family: var(--font-primary);
           color: ${cssColorVariable};
+          overflow: auto;
         }
       `}</style>
     </>

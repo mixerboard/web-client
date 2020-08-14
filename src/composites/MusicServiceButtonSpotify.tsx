@@ -28,11 +28,15 @@ const MusicServiceButtonSpotify: FC<Props> = ({ selected, ...rest }) => {
 
   const authenticate = async () => {
     if (!checkIsAuthenticated()) {
-      const {
-        data: { requestAuthUrl },
-      } = await api.get("/spotify/request-auth-url");
+      try {
+        const {
+          data: { requestAuthUrl },
+        } = await api.get("/spotify/request-auth-url");
 
-      requestAuthUrl && window.location.replace(requestAuthUrl);
+        window.location.replace(requestAuthUrl);
+      } catch (e) {
+        console.error(e);
+      }
     }
   };
 
