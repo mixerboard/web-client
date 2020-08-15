@@ -1,6 +1,7 @@
 import { FC, useState, SetStateAction, Dispatch } from "react";
 import Button from "./Button";
 import { useRouter } from "next/router";
+import api from "services/api";
 
 interface Props {
   musicServiceId: musicServiceId | null;
@@ -12,13 +13,29 @@ const ButtonPush: FC<Props> = ({ musicServiceId, library, setPushResult }) => {
   const { push } = useRouter();
   const [loading, setLoading] = useState(false);
 
-  const handleClick = () => {
+  const handleClick = async () => {
+    setLoading(true);
+
     if (musicServiceId === "spotify") {
-      return;
+      const {
+        data: { uploadResult },
+      } = await api.patch(
+        "/spotify/library",
+        { library },
+        {
+          headers: {
+            Authorization: localStorage.getItem("spotifyAccessToken"),
+          },
+        }
+      );
+
+      console.log(uploadResult);
     } else if (musicServiceId === "json") {
       localStorage.setItem("jsonInput", JSON.stringify(library));
       push("/json-output");
     }
+
+    setLoading(false);
   };
 
   return (
