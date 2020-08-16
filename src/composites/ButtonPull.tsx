@@ -1,17 +1,14 @@
-import { FC, Dispatch, SetStateAction, useState } from "react";
+import { FC, useState } from "react";
 import Button from "composites/Button";
 import api from "services/api";
+import { useApp } from "contexts/app";
 
-interface Props {
-  musicServiceId: musicServiceId | null;
-  setLibrary: Dispatch<SetStateAction<Library>>;
-}
-
-const ButtonPull: FC<Props> = ({ musicServiceId, setLibrary }) => {
+const ButtonPull: FC = () => {
+  const [state, dispatch] = useApp();
   const [loading, setLoading] = useState(false);
 
   const handleClick = async () => {
-    if (musicServiceId === "spotify") {
+    if (state.selectedSource === "spotify") {
       setLoading(true);
 
       try {
@@ -23,7 +20,7 @@ const ButtonPull: FC<Props> = ({ musicServiceId, setLibrary }) => {
           },
         });
 
-        setLibrary(library);
+        dispatch({ type: "setLibrary", library });
       } catch (e) {
         console.error(e);
       } finally {
@@ -33,7 +30,11 @@ const ButtonPull: FC<Props> = ({ musicServiceId, setLibrary }) => {
   };
 
   return (
-    <Button loading={loading} disabled={!musicServiceId} onClick={handleClick}>
+    <Button
+      loading={loading}
+      disabled={!state.selectedSource}
+      onClick={handleClick}
+    >
       Pull
     </Button>
   );

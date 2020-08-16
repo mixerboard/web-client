@@ -1,25 +1,21 @@
 import { FC, useState, SetStateAction, Dispatch } from "react";
 import Button from "./Button";
 import api from "services/api";
+import { useApp } from "contexts/app";
 
-interface Props {
-  musicServiceId: musicServiceId | null;
-  library: Library;
-  setPushResult: Dispatch<SetStateAction<PushResult>>;
-}
-
-const ButtonPush: FC<Props> = ({ musicServiceId, library, setPushResult }) => {
+const ButtonPush: FC = () => {
+  const [state, dispatch] = useApp();
   const [loading, setLoading] = useState(false);
 
   const handleClick = async () => {
     setLoading(true);
 
-    if (musicServiceId === "spotify") {
+    if (state.selectedSource === "spotify") {
       const {
         data: { pushResult },
       } = await api.patch(
         "/spotify/library",
-        { library },
+        { library: state.library },
         {
           headers: {
             Authorization: localStorage.getItem("spotifyAccessToken"),
@@ -27,14 +23,18 @@ const ButtonPush: FC<Props> = ({ musicServiceId, library, setPushResult }) => {
         }
       );
 
-      setPushResult(pushResult);
+      dispatch({ type: "setPushResult", pushResult });
     }
 
     setLoading(false);
   };
 
   return (
-    <Button loading={loading} disabled={!musicServiceId} onClick={handleClick}>
+    <Button
+      loading={loading}
+      disabled={!state.selectedSource}
+      onClick={handleClick}
+    >
       Push
     </Button>
   );

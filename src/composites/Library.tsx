@@ -4,27 +4,25 @@ import ItemList from "./ItemList";
 import Item from "composites/Item";
 import Button from "./Button";
 import Alert from "./Alert";
+import { useApp } from "contexts/app";
 
-interface Props {
-  library: Library;
-  setLibrary: Dispatch<SetStateAction<Library>>;
-}
-
-const Library: FC<Props> = ({ library, setLibrary }) => {
+const Library: FC = () => {
+  const [state, dispatch] = useApp();
   const [isEditing, setIsEditing] = useState<boolean>();
   const [editingLibrary, setEditingLibrary] = useState<string>();
   const [editingLibraryError, setEditingLibraryError] = useState<string>();
 
   useEffect(() => {
-    setEditingLibrary(JSON.stringify(library));
+    setEditingLibrary(JSON.stringify(state.library));
     setEditingLibraryError("");
-  }, [library]);
+  }, [state.library]);
 
   const toggleIsEditing = () => setIsEditing(!isEditing);
 
   const saveLibrary = () => {
     try {
-      setLibrary(JSON.parse(editingLibrary));
+      const library = JSON.parse(editingLibrary);
+      dispatch({ type: "setLibrary", library });
       setIsEditing(false);
     } catch (e) {
       setEditingLibraryError(e.message);
@@ -32,25 +30,26 @@ const Library: FC<Props> = ({ library, setLibrary }) => {
   };
 
   const deleteItem = (itemId: string, itemType: string) => {
-    setLibrary({
-      ...library,
-      [itemType]: library[itemType].filter(({ id }) => id !== itemId),
-    });
+    const library = {
+      ...state.library,
+      [itemType]: state.library[itemType].filter(({ id }) => id !== itemId),
+    };
+    dispatch({ type: "setLibrary", library });
   };
 
-  const tracks = library.tracks.map((track) => (
+  const tracks = state.library.tracks.map((track) => (
     <Item key={track.id} onDelete={() => deleteItem(track.id, "tracks")}>
       {track.name}
     </Item>
   ));
 
-  const albums = library.albums.map((album) => (
+  const albums = state.library.albums.map((album) => (
     <Item key={album.id} onDelete={() => deleteItem(album.id, "albums")}>
       {album.name}
     </Item>
   ));
 
-  const playlists = library.playlists.map((playlist) => (
+  const playlists = state.library.playlists.map((playlist) => (
     <Item
       key={playlist.id}
       onDelete={() => deleteItem(playlist.id, "playlists")}

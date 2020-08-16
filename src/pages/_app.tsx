@@ -1,13 +1,16 @@
 import { FC } from "react";
 import { AppProps } from "next/app";
 import Layout from "composites/Layout";
+import { AppProvider } from "contexts/app";
 
 const CustomApp: FC<AppProps> = ({ Component, pageProps }) => {
   return (
     <>
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
+      <AppProvider>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </AppProvider>
       <style jsx global>{`
         @import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=IBM+Plex+Sans&display=swap");
 
