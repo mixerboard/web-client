@@ -1,4 +1,4 @@
-import { FC, useState, SetStateAction, Dispatch } from "react";
+import { FC, useState } from "react";
 import Button from "./Button";
 import api from "services/api";
 import { useApp } from "contexts/app";

@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { NextPage } from "next";
 import Card from "components/Card";
 import Heading from "components/Heading";
 import MusicServiceButtonSelector from "composites/MusicServiceButtonSelector";
@@ -7,29 +7,27 @@ import Library from "composites/Library";
 import ButtonPush from "composites/ButtonPush";
 import PushResult from "composites/PushResult";
 
-const HomePage: FC = () => {
-  return (
-    <>
-      <Card>
-        <Heading>Source</Heading>
-        <MusicServiceButtonSelector />
-        <ButtonPull />
-      </Card>
-      <Card>
-        <Heading>Library</Heading>
-        <Library />
-      </Card>
-      <Card>
-        <Heading>Target</Heading>
-        <MusicServiceButtonSelector />
-        <ButtonPush />
-      </Card>
-      <Card>
-        <Heading>Push Result</Heading>
-        <PushResult />
-      </Card>
-    </>
-  );
-};
+const HomePage: NextPage = () => (
+  <>
+    <Card>
+      <Heading>Source</Heading>
+      <MusicServiceButtonSelector />
+      <ButtonPull />
+    </Card>
+    <Card>
+      <Heading>Library</Heading>
+      <Library />
+    </Card>
+    <Card>
+      <Heading>Target</Heading>
+      <MusicServiceButtonSelector />
+      <ButtonPush />
+    </Card>
+    <Card>
+      <Heading>Push Result</Heading>
+      <PushResult />
+    </Card>
+  </>
+);
 
 export default HomePage;

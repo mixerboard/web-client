@@ -6,7 +6,7 @@ import ItemResultInner from "./ItemResultInner";
 import { useApp } from "contexts/app";
 
 const PushResult: FC = () => {
-  const [state, dispatch] = useApp();
+  const [state] = useApp();
   return (
     <>
       <Heading level={2}>Pushed</Heading>
