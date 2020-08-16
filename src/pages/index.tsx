@@ -15,7 +15,6 @@ const HomePage: NextPage = () => (
       <ButtonPull />
     </Card>
     <Card>
-      <Heading>Library</Heading>
       <Library />
     </Card>
     <Card>
