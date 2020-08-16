@@ -9,19 +9,9 @@ const Library: FC = () => {
 
   return (
     <>
-      <div>
-        <Heading>Library</Heading>
-        <Button link onClick={() => setIsEditing(!isEditing)}>
-          Change View
-        </Button>
-      </div>
+      <Heading>Library</Heading>
+      <Button onClick={() => setIsEditing(!isEditing)}>Change View</Button>
       {isEditing ? <LibraryViewText /> : <LibraryViewGraphical />}
-      <style jsx>{`
-        div {
-          display: grid;
-          grid-auto-flow: column;
-        }
-      `}</style>
     </>
   );
 };
