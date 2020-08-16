@@ -6,12 +6,10 @@ interface Props {
   onDelete?: () => void;
 }
 
-const Item: FC<Props> = ({ onDelete, children }) => {
-  return (
-    <ItemComponent onDelete={onDelete}>
-      <Text>{children}</Text>
-    </ItemComponent>
-  );
-};
+const Item: FC<Props> = ({ onDelete, children }) => (
+  <ItemComponent onDelete={onDelete}>
+    <Text>{children}</Text>
+  </ItemComponent>
+);
 
 export default Item;

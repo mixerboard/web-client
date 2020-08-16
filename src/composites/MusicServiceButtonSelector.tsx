@@ -1,37 +1,23 @@
-import { FC, Dispatch, SetStateAction } from "react";
+import { FC } from "react";
 import MusicServiceButtonSpotify from "./MusicServiceButtonSpotify";
 
-interface Props {
-  selected: string;
-  setSelected: Dispatch<SetStateAction<string>>;
-}
-
-const MusicServiceButtonSelector: FC<Props> = ({ selected, setSelected }) => {
-  const toggleSelected = (newSelection: string) => {
-    setSelected(selected === newSelection ? "" : newSelection);
-  };
-
-  return (
-    <>
-      <div>
-        <MusicServiceButtonSpotify
-          selected={selected === "spotify"}
-          onClick={() => toggleSelected("spotify")}
-        />
-      </div>
-      <style jsx>{`
-        div {
-          display: grid;
-          grid-gap: var(--component-padding);
-          grid-template-columns: repeat(
-            auto-fit,
-            minmax(var(--music-service-button-size), 1fr)
-          );
-          justify-items: center;
-        }
-      `}</style>
-    </>
-  );
-};
+const MusicServiceButtonSelector: FC = () => (
+  <>
+    <div>
+      <MusicServiceButtonSpotify />
+    </div>
+    <style jsx>{`
+      div {
+        display: grid;
+        grid-gap: var(--component-padding);
+        grid-template-columns: repeat(
+          auto-fit,
+          minmax(var(--music-service-button-size), 1fr)
+        );
+        justify-items: center;
+      }
+    `}</style>
+  </>
+);
 
 export default MusicServiceButtonSelector;

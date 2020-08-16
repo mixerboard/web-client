@@ -2,70 +2,48 @@ import { FC } from "react";
 import Heading from "components/Heading";
 import ItemList from "./ItemList";
 import Item from "./Item";
-import ItemResultInner from "./ItemResultInner";
+import { useApp } from "contexts/app";
 
-interface Props {
-  result: PushResult;
-}
+const PushResult: FC = () => {
+  const [state] = useApp();
 
-const PushResult: FC<Props> = ({ result }) => {
+  const renderItems = (items: (Track | Album | Playlist)[]) => {
+    return items.map((item) => <Item key={item.id}>{item.name}</Item>);
+  };
+
   return (
     <>
       <Heading level={2}>Pushed</Heading>
       <Heading level={3}>Tracks</Heading>
       <ItemList
         cutoff={3}
-        items={result.pushed.tracks.map(({ id, name }) => (
-          <Item key={id}>
-            <ItemResultInner result="pushed" text={name} />
-          </Item>
-        ))}
+        items={renderItems(state.pushResult.pushed.tracks)}
       />
       <Heading level={3}>Albums</Heading>
       <ItemList
         cutoff={3}
-        items={result.pushed.albums.map(({ id, name }) => (
-          <Item key={id}>
-            <ItemResultInner result="pushed" text={name} />
-          </Item>
-        ))}
+        items={renderItems(state.pushResult.pushed.albums)}
       />
       <Heading level={3}>Playlists</Heading>
       <ItemList
         cutoff={3}
-        items={result.pushed.playlists.map(({ id, name }) => (
-          <Item key={id}>
-            <ItemResultInner result="pushed" text={name} />
-          </Item>
-        ))}
+        items={renderItems(state.pushResult.pushed.playlists)}
       />
       <Heading level={2}>Failed</Heading>
       <Heading level={3}>Tracks</Heading>
       <ItemList
         cutoff={3}
-        items={result.failed.tracks.map(({ id, name }) => (
-          <Item key={id}>
-            <ItemResultInner result="failed" text={name} />
-          </Item>
-        ))}
+        items={renderItems(state.pushResult.failed.tracks)}
       />
       <Heading level={3}>Albums</Heading>
       <ItemList
         cutoff={3}
-        items={result.failed.albums.map(({ id, name }) => (
-          <Item key={id}>
-            <ItemResultInner result="failed" text={name} />
-          </Item>
-        ))}
+        items={renderItems(state.pushResult.failed.albums)}
       />
       <Heading level={3}>Playlists</Heading>
       <ItemList
         cutoff={3}
-        items={result.failed.playlists.map(({ id, name }) => (
-          <Item key={id}>
-            <ItemResultInner result="failed" text={name} />
-          </Item>
-        ))}
+        items={renderItems(state.pushResult.failed.playlists)}
       />
     </>
   );

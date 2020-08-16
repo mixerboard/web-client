@@ -2,12 +2,12 @@ import { FC, ButtonHTMLAttributes, useState, useEffect } from "react";
 import MusicServiceButton from "components/MusicServiceButton";
 import { FaSpotify } from "react-icons/fa";
 import api from "services/api";
+import { useApp } from "contexts/app";
 
-interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
-  selected: boolean;
-}
-
-const MusicServiceButtonSpotify: FC<Props> = ({ selected, ...rest }) => {
+const MusicServiceButtonSpotify: FC<ButtonHTMLAttributes<
+  HTMLButtonElement
+>> = ({ ...rest }) => {
+  const [state, dispatch] = useApp();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
@@ -45,11 +45,11 @@ const MusicServiceButtonSpotify: FC<Props> = ({ selected, ...rest }) => {
       icon={<FaSpotify />}
       name="Spotify"
       authenticated={isAuthenticated}
-      selected={selected}
+      selected={state.selectedSource === "spotify"}
       {...rest}
-      onClick={async (e) => {
+      onClick={async () => {
         await authenticate();
-        rest.onClick(e);
+        dispatch({ type: "setSelectedSource", selectedSource: "spotify" });
       }}
     />
   );
