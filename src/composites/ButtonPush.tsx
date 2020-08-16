@@ -18,7 +18,7 @@ const ButtonPush: FC<Props> = ({ musicServiceId, library, setPushResult }) => {
 
     if (musicServiceId === "spotify") {
       const {
-        data: { uploadResult },
+        data: { pushResult },
       } = await api.patch(
         "/spotify/library",
         { library },
@@ -29,7 +29,7 @@ const ButtonPush: FC<Props> = ({ musicServiceId, library, setPushResult }) => {
         }
       );
 
-      console.log(uploadResult);
+      setPushResult(pushResult);
     } else if (musicServiceId === "json") {
       localStorage.setItem("jsonInput", JSON.stringify(library));
       push("/json-output");
