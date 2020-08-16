@@ -1,6 +1,5 @@
 import { FC, Dispatch, SetStateAction } from "react";
 import MusicServiceButtonSpotify from "./MusicServiceButtonSpotify";
-import MusicServiceButtonJson from "./MusicServiceButtonJson";
 
 interface Props {
   selected: string;
@@ -18,10 +17,6 @@ const MusicServiceButtonSelector: FC<Props> = ({ selected, setSelected }) => {
         <MusicServiceButtonSpotify
           selected={selected === "spotify"}
           onClick={() => toggleSelected("spotify")}
-        />
-        <MusicServiceButtonJson
-          selected={selected === "json"}
-          onClick={() => toggleSelected("json")}
         />
       </div>
       <style jsx>{`

@@ -17,9 +17,11 @@ const ItemList: FC<Props> = ({ items, cutoff }) => {
     <>
       <div>
         {items.slice(0, expanded ? items.length : cutoff)}
-        <Button link onClick={() => setExpanded(!expanded)}>
-          {expanded ? "Less" : `+${items.length - cutoff} More`}
-        </Button>
+        {items.length > cutoff && (
+          <Button link onClick={() => setExpanded(!expanded)}>
+            {expanded ? "Less" : `+${items.length - cutoff} More`}
+          </Button>
+        )}
       </div>
       <style jsx>{`
         div {

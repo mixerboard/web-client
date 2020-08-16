@@ -1,5 +1,6 @@
 import { FC, useState, SetStateAction, Dispatch } from "react";
 import Button from "./Button";
+import api from "services/api";
 
 interface Props {
   musicServiceId: musicServiceId | null;
@@ -10,18 +11,26 @@ interface Props {
 const ButtonPush: FC<Props> = ({ musicServiceId, library, setPushResult }) => {
   const [loading, setLoading] = useState(false);
 
-  const handleClick = () => {
-    if (musicServiceId === "spotify") {
-      return;
-    } else if (musicServiceId === "json") {
-      localStorage.setItem("jsonInput", JSON.stringify(library));
+  const handleClick = async () => {
+    setLoading(true);
 
-      // Because JSON is local, all items upload successfully
-      setPushResult({
-        pushed: library,
-        failed: { albums: [], tracks: [], playlists: [] },
-      });
+    if (musicServiceId === "spotify") {
+      const {
+        data: { pushResult },
+      } = await api.patch(
+        "/spotify/library",
+        { library },
+        {
+          headers: {
+            Authorization: localStorage.getItem("spotifyAccessToken"),
+          },
+        }
+      );
+
+      setPushResult(pushResult);
     }
+
+    setLoading(false);
   };
 
   return (
