@@ -6,7 +6,6 @@ import ButtonPull from "composites/ButtonPull";
 import Library from "composites/Library";
 import ButtonPush from "composites/ButtonPush";
 import PushResult from "composites/PushResult";
-import Button from "composites/Button";
 
 const HomePage: FC = () => {
   const emptyLibrary: Library = { tracks: [], albums: [], playlists: [] };
@@ -18,14 +17,6 @@ const HomePage: FC = () => {
   const [library, setLibrary] = useState<Library>(emptyLibrary);
   const [selectedTarget, setSelectedTarget] = useState<musicServiceId | null>();
   const [pushResult, setPushResult] = useState<PushResult>(emptyPushResult);
-
-  const reset = () => {
-    localStorage.removeItem("jsonInput");
-    setSelectedSource(null);
-    setSelectedTarget(null);
-    setPushResult(emptyPushResult);
-    setLibrary(emptyLibrary);
-  };
 
   return (
     <>
@@ -57,9 +48,6 @@ const HomePage: FC = () => {
         <Heading>Push Result</Heading>
         <PushResult result={pushResult} />
       </Card>
-      <Button variant="error" onClick={reset}>
-        Reset
-      </Button>
     </>
   );
 };

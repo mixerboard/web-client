@@ -1,6 +1,5 @@
 import { FC, useState, SetStateAction, Dispatch } from "react";
 import Button from "./Button";
-import { useRouter } from "next/router";
 import api from "services/api";
 
 interface Props {
@@ -10,7 +9,6 @@ interface Props {
 }
 
 const ButtonPush: FC<Props> = ({ musicServiceId, library, setPushResult }) => {
-  const { push } = useRouter();
   const [loading, setLoading] = useState(false);
 
   const handleClick = async () => {
@@ -30,9 +28,6 @@ const ButtonPush: FC<Props> = ({ musicServiceId, library, setPushResult }) => {
       );
 
       setPushResult(pushResult);
-    } else if (musicServiceId === "json") {
-      localStorage.setItem("jsonInput", JSON.stringify(library));
-      push("/json-output");
     }
 
     setLoading(false);
