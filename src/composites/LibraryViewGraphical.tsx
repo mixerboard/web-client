@@ -25,6 +25,7 @@ const LibraryViewGraphical: FC = () => {
       </Item>
     ));
   };
+
   return (
     <>
       <Heading level={2}>Tracks</Heading>
