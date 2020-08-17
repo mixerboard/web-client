@@ -1,11 +1,8 @@
 import { FC } from "react";
-import MusicServiceButtonSpotify from "./MusicServiceButtonSpotify";
 
-const MusicServiceButtonSelector: FC = () => (
+const MusicServiceButtonGrid: FC = ({ children }) => (
   <>
-    <div>
-      <MusicServiceButtonSpotify />
-    </div>
+    <div>{children}</div>
     <style jsx>{`
       div {
         display: grid;
@@ -20,4 +17,4 @@ const MusicServiceButtonSelector: FC = () => (
   </>
 );
 
-export default MusicServiceButtonSelector;
+export default MusicServiceButtonGrid;

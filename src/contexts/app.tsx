@@ -1,4 +1,4 @@
-import { createContext, FC, useReducer, useContext, ReactNode } from "react";
+import { createContext, FC, useReducer, useContext } from "react";
 
 type Action =
   | { type: "setSelectedSource"; selectedSource: musicServiceId }
@@ -41,7 +41,7 @@ const appReducer = (state: State, action: Action) => {
   }
 };
 
-const AppProvider = ({ children }: { children: ReactNode }) => {
+const AppProvider: FC = ({ children }) => {
   const [state, dispatch] = useReducer(appReducer, initialState);
 
   return (
@@ -73,7 +73,7 @@ const useAppDispatch = () => {
   return context;
 };
 
-const useApp = () => {
+const useApp: () => [State, Dispatch] = () => {
   const app: [State, Dispatch] = [useAppState(), useAppDispatch()];
   return app;
 };

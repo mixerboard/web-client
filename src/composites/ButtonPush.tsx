@@ -1,35 +1,25 @@
 import { FC, useState } from "react";
 import Button from "./Button";
-import api from "services/api";
 import { useApp } from "contexts/app";
+import useSpotify from "hooks/useSpotify";
 
 const ButtonPush: FC = () => {
-  const [state, dispatch] = useApp();
+  const [state] = useApp();
   const [loading, setLoading] = useState(false);
+  const spotify = useSpotify();
 
   const handleClick = async () => {
-    if (state.selectedSource === "spotify") {
-      setLoading(true);
+    setLoading(true);
 
-      try {
-        const {
-          data: { pushResult },
-        } = await api.patch(
-          "/spotify/library",
-          { library: state.library },
-          {
-            headers: {
-              Authorization: localStorage.getItem("spotifyAccessToken"),
-            },
-          }
-        );
-
-        dispatch({ type: "setPushResult", pushResult });
-      } catch (e) {
-        console.error(e);
-      } finally {
-        setLoading(false);
+    try {
+      switch (state.selectedSource) {
+        case "spotify":
+          await spotify.pushLibrary();
       }
+    } catch (e) {
+      console.error(e);
+    } finally {
+      setLoading(false);
     }
   };
 

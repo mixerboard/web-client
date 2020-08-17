@@ -1,55 +1,25 @@
-import { FC, ButtonHTMLAttributes, useState, useEffect } from "react";
+import { FC, ButtonHTMLAttributes } from "react";
 import MusicServiceButton from "components/MusicServiceButton";
 import { FaSpotify } from "react-icons/fa";
-import api from "services/api";
-import { useApp } from "contexts/app";
+import useSpotify from "hooks/useSpotify";
 
-const MusicServiceButtonSpotify: FC<ButtonHTMLAttributes<
-  HTMLButtonElement
->> = ({ ...rest }) => {
-  const [state, dispatch] = useApp();
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
+  selected: boolean;
+}
 
-  useEffect(() => {
-    setIsAuthenticated(checkIsAuthenticated());
-  }, []);
-
-  const checkIsAuthenticated = () => {
-    const spotifyAccessToken = localStorage.getItem("spotifyAccessToken");
-    const spotifyAccessTokenExpireTime = parseInt(
-      localStorage.getItem("spotifyAccessTokenExpireTime")
-    );
-    const currentTime = new Date().getTime() / 1000;
-    const tokenExpired = spotifyAccessTokenExpireTime < currentTime;
-    const isAuthenticated = spotifyAccessToken && !tokenExpired;
-
-    return isAuthenticated;
-  };
-
-  const authenticate = async () => {
-    if (!checkIsAuthenticated()) {
-      try {
-        const {
-          data: { requestAuthUrl },
-        } = await api.get("/spotify/request-auth-url");
-
-        window.location.replace(requestAuthUrl);
-      } catch (e) {
-        console.error(e);
-      }
-    }
-  };
+const MusicServiceButtonSpotify: FC<Props> = ({ selected, ...rest }) => {
+  const spotify = useSpotify();
 
   return (
     <MusicServiceButton
       icon={<FaSpotify />}
       name="Spotify"
-      authenticated={isAuthenticated}
-      selected={state.selectedSource === "spotify"}
+      authenticated={spotify.isAuthenticated}
+      selected={selected}
       {...rest}
-      onClick={async () => {
-        await authenticate();
-        dispatch({ type: "setSelectedSource", selectedSource: "spotify" });
+      onClick={async (e) => {
+        !spotify.isAuthenticated && (await spotify.requestAuthorization());
+        rest.onClick(e);
       }}
     />
   );
