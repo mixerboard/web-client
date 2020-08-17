@@ -8,25 +8,29 @@ const ButtonPush: FC = () => {
   const [loading, setLoading] = useState(false);
 
   const handleClick = async () => {
-    setLoading(true);
-
     if (state.selectedSource === "spotify") {
-      const {
-        data: { pushResult },
-      } = await api.patch(
-        "/spotify/library",
-        { library: state.library },
-        {
-          headers: {
-            Authorization: localStorage.getItem("spotifyAccessToken"),
-          },
-        }
-      );
+      setLoading(true);
 
-      dispatch({ type: "setPushResult", pushResult });
+      try {
+        const {
+          data: { pushResult },
+        } = await api.patch(
+          "/spotify/library",
+          { library: state.library },
+          {
+            headers: {
+              Authorization: localStorage.getItem("spotifyAccessToken"),
+            },
+          }
+        );
+
+        dispatch({ type: "setPushResult", pushResult });
+      } catch (e) {
+        console.error(e);
+      } finally {
+        setLoading(false);
+      }
     }
-
-    setLoading(false);
   };
 
   return (
