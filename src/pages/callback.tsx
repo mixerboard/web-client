@@ -5,33 +5,40 @@ import Alert from "components/Alert";
 import useSpotify from "hooks/useSpotify";
 
 const CallbackPage: FC = () => {
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<Error>();
   const { query } = useRouter();
   const spotify = useSpotify();
 
   useEffect(() => {
-    (async () => {
-      setError(null);
-      const musicServiceId = query.musicServiceId;
+    const handleCallback = async () => {
+      try {
+        switch (query.musicServiceId) {
+          case "spotify": {
+            const code = query.code.toString();
 
-      if (musicServiceId === "spotify") {
-        const code = query.code.toString();
-        !code && setError("No authentication code found");
+            if (!code) {
+              setError(new Error("No authentication code found"));
+            }
 
-        try {
-          await spotify.requestTokens(code);
-        } catch (e) {
-          setError(e.message);
+            await spotify.authenticate(code);
+            break;
+          }
+          default: {
+            setError(new Error("Invalid music service ID"));
+          }
         }
-      } else {
-        setError("Invalid music service ID");
+      } catch (e) {
+        setError(e);
       }
-    })();
+    };
+
+    setError(null);
+    handleCallback();
   }, [query]);
 
   return error ? (
     <Alert variant="error">
-      <Text variant="error">Error: {error}</Text>
+      <Text variant="error">Error: {error.message}</Text>
     </Alert>
   ) : (
     <Text>Authenticating, please wait...</Text>

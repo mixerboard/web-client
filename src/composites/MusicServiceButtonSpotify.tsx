@@ -18,7 +18,7 @@ const MusicServiceButtonSpotify: FC<Props> = ({ selected, ...rest }) => {
       selected={selected}
       {...rest}
       onClick={async (e) => {
-        !spotify.isAuthenticated && (await spotify.requestAuthorization());
+        !spotify.isAuthenticated && (await spotify.authenticate());
         rest.onClick(e);
       }}
     />
