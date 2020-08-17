@@ -2,9 +2,16 @@ import { FC } from "react";
 import Header from "components/Header";
 import Image from "components/Image";
 import Main from "components/Main";
+import Head from "next/head";
 
-const Layout: FC = ({ children }) => (
+interface Props {
+  title?: string;
+}
+const Layout: FC<Props> = ({ title = "Mixerboard", children }) => (
   <>
+    <Head>
+      <title>{title}</title>
+    </Head>
     <Header
       logoImage={
         <Image
