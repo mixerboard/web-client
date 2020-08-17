@@ -5,28 +5,24 @@ import { useApp } from "contexts/app";
 
 const useSpotify: () => {
   isAuthenticated: boolean;
-  requestAuthorization: () => Promise<void>;
-  requestTokens: (code: string) => Promise<void>;
+  authenticate: (code?: string) => Promise<void>;
   pullLibrary: () => Promise<void>;
   pushLibrary: () => Promise<void>;
 } = () => {
-  const [state, dispatch] = useApp();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [state, dispatch] = useApp();
+  const router = useRouter();
   const api = useApi();
-  const { push } = useRouter();
 
-  useEffect(() => setIsAuthenticated(checkIsAuthenticated()), []);
+  useEffect(() => refreshIsAuthenticated(), []);
 
-  const checkIsAuthenticated = () => {
-    const spotifyAccessToken = localStorage.getItem("spotifyAccessToken");
-    const spotifyAccessTokenExpireTime = parseInt(
-      localStorage.getItem("spotifyAccessTokenExpireTime")
-    );
+  const refreshIsAuthenticated = () => {
+    const accessToken = localStorage.getItem("spotifyAccessToken");
+    const expireTime = localStorage.getItem("spotifyExpireTime");
     const currentTime = new Date().getTime() / 1000;
-    const tokenExpired = spotifyAccessTokenExpireTime < currentTime;
-    const isAuthenticated = spotifyAccessToken && !tokenExpired;
+    const tokenExpired = parseInt(expireTime) < currentTime;
 
-    return isAuthenticated;
+    setIsAuthenticated(accessToken && !tokenExpired);
   };
 
   const requestAuthorization = async () => {
@@ -37,18 +33,35 @@ const useSpotify: () => {
     window.location.replace(requestAuthUrl);
   };
 
-  const requestTokens = async (code: string) => {
+  const requestTokens = async (code?: string, refreshToken?: string) => {
     const {
-      data: { accessToken, expiresIn },
-    } = await api.post("/spotify/tokens", { code });
+      data: { accessToken, refreshToken: newRefreshToken, expiresIn },
+    } = await api.post("/spotify/tokens", { code, refreshToken });
+
+    const expireTime = new Date().getTime() / 1000 + expiresIn;
 
     localStorage.setItem("spotifyAccessToken", accessToken);
-    localStorage.setItem(
-      "spotifyAccessTokenExpireTime",
-      new Date().getTime() / 1000 + expiresIn
-    );
+    localStorage.setItem("spotifyExpireTime", expireTime);
 
-    push("/");
+    if (newRefreshToken) {
+      localStorage.setItem("spotifyRefreshToken", newRefreshToken);
+    } else {
+      localStorage.removeItem("spotifyRefreshToken");
+    }
+
+    router.push("/");
+  };
+
+  const authenticate = async (code?: string) => {
+    const refreshToken = localStorage.getItem("spotifyRefreshToken");
+
+    if (code || refreshToken) {
+      await requestTokens(code, refreshToken);
+    } else {
+      await requestAuthorization();
+    }
+
+    refreshIsAuthenticated();
   };
 
   const pullLibrary = async () => {
@@ -81,8 +94,7 @@ const useSpotify: () => {
 
   return {
     isAuthenticated,
-    requestAuthorization,
-    requestTokens,
+    authenticate,
     pullLibrary,
     pushLibrary,
   };

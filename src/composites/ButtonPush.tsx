@@ -13,8 +13,9 @@ const ButtonPush: FC = () => {
 
     try {
       switch (state.selectedSource) {
-        case "spotify":
+        case "spotify": {
           await spotify.pushLibrary();
+        }
       }
     } catch (e) {
       console.error(e);
