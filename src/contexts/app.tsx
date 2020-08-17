@@ -58,9 +58,9 @@ const useAppState = () => {
 
   if (context === undefined) {
     throw new Error("useAppState must be used within a AppProvider");
+  } else {
+    return context;
   }
-
-  return context;
 };
 
 const useAppDispatch = () => {
@@ -68,14 +68,13 @@ const useAppDispatch = () => {
 
   if (context === undefined) {
     throw new Error("useAppDispatch must be used within a AppProvider");
+  } else {
+    return context;
   }
-
-  return context;
 };
 
 const useApp: () => [State, Dispatch] = () => {
-  const app: [State, Dispatch] = [useAppState(), useAppDispatch()];
-  return app;
+  return [useAppState(), useAppDispatch()];
 };
 
 export { AppProvider, useApp };
