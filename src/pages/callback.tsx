@@ -2,11 +2,12 @@ import { FC, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Text from "components/Text";
 import Alert from "components/Alert";
-import api from "services/api";
+import useSpotify from "hooks/useSpotify";
 
 const CallbackPage: FC = () => {
   const [error, setError] = useState(null);
-  const { query, push } = useRouter();
+  const { query } = useRouter();
+  const spotify = useSpotify();
 
   useEffect(() => {
     (async () => {
@@ -14,24 +15,13 @@ const CallbackPage: FC = () => {
       const musicServiceId = query.musicServiceId;
 
       if (musicServiceId === "spotify") {
-        const code = query.code;
-
+        const code = query.code.toString();
         !code && setError("No authentication code found");
 
         try {
-          const {
-            data: { accessToken, expiresIn },
-          } = await api.post("/spotify/tokens", { code });
-
-          localStorage.setItem("spotifyAccessToken", accessToken);
-          localStorage.setItem(
-            "spotifyAccessTokenExpireTime",
-            new Date().getTime() / 1000 + expiresIn
-          );
-
-          push("/");
+          await spotify.requestTokens(code);
         } catch (e) {
-          setError("Something broke");
+          setError(e.message);
         }
       } else {
         setError("Invalid music service ID");

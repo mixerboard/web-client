@@ -1,31 +1,25 @@
 import { FC, useState } from "react";
 import Button from "composites/Button";
-import api from "services/api";
 import { useApp } from "contexts/app";
+import useSpotify from "hooks/useSpotify";
 
 const ButtonPull: FC = () => {
-  const [state, dispatch] = useApp();
+  const [state] = useApp();
   const [loading, setLoading] = useState(false);
+  const spotify = useSpotify();
 
   const handleClick = async () => {
-    if (state.selectedSource === "spotify") {
-      setLoading(true);
+    setLoading(true);
 
-      try {
-        const {
-          data: { library },
-        } = await api.get("/spotify/library", {
-          headers: {
-            Authorization: localStorage.getItem("spotifyAccessToken"),
-          },
-        });
-
-        dispatch({ type: "setLibrary", library });
-      } catch (e) {
-        console.error(e);
-      } finally {
-        setLoading(false);
+    try {
+      switch (state.selectedSource) {
+        case "spotify":
+          await spotify.pullLibrary();
       }
+    } catch (e) {
+      console.error(e);
+    } finally {
+      setLoading(false);
     }
   };
 

@@ -1,4 +1,4 @@
-import { createContext, FC, useReducer, useContext, ReactNode } from "react";
+import { createContext, FC, useReducer, useContext } from "react";
 
 type Action =
   | { type: "setSelectedSource"; selectedSource: musicServiceId }
@@ -41,7 +41,7 @@ const appReducer = (state: State, action: Action) => {
   }
 };
 
-const AppProvider = ({ children }: { children: ReactNode }) => {
+const AppProvider: FC = ({ children }) => {
   const [state, dispatch] = useReducer(appReducer, initialState);
 
   return (
@@ -58,9 +58,9 @@ const useAppState = () => {
 
   if (context === undefined) {
     throw new Error("useAppState must be used within a AppProvider");
+  } else {
+    return context;
   }
-
-  return context;
 };
 
 const useAppDispatch = () => {
@@ -68,14 +68,13 @@ const useAppDispatch = () => {
 
   if (context === undefined) {
     throw new Error("useAppDispatch must be used within a AppProvider");
+  } else {
+    return context;
   }
-
-  return context;
 };
 
-const useApp = () => {
-  const app: [State, Dispatch] = [useAppState(), useAppDispatch()];
-  return app;
+const useApp: () => [State, Dispatch] = () => {
+  return [useAppState(), useAppDispatch()];
 };
 
 export { AppProvider, useApp };
