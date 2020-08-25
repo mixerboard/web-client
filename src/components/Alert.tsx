@@ -6,7 +6,6 @@ interface Props {
 
 const Alert: FC<Props> = ({ variant = "primary", children }) => {
   const cssColorVariable = `var(--color-${variant})`;
-
   return (
     <>
       <div>{children}</div>
