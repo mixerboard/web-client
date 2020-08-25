@@ -4,4 +4,4 @@
 
 -------------------
 # web-client
-Web based Mixerboard client. (Hosted Version)[https://mixerboard.vercel.app/]
+Web based Mixerboard client. [Hosted Version](https://mixerboard.vercel.app/)
