@@ -4,8 +4,6 @@
 
 -------------------
 
-[Hosted Version](https://mixerboard.vercel.app/)
-
 # About
 Mixerboard is an open source application for transferring music libraries between music streaming services. This is the web client front end, used in conjunction with the server.
 
